@@ -27,21 +27,33 @@ export const site = {
   ],
 };
 
+// Photos réelles Postel, recadrées et converties en WebP (assets/img). r = dimensions de la plus grande version.
+const I = (f, w, r, alt, pos = '50% 50%') => ({ f, w, r, alt, pos, src: `/assets/img/${f}-${w[w.length - 1]}.webp` });
 export const img = {
-  logo: IMG + '2018/06/logo-demenagement-postel.png',
-  truck: { src: IMG + '2018/11/slider-camion-postel-demenagement.jpg', pos: '50% 50%', alt: 'Semi-remorque Déménagements Postel aux couleurs de l\'agence de Rouen' },
-  truckDepot: { src: IMG + '2018/09/chargement-container-chez-vous.png', pos: '100% 50%', alt: 'Camion Postel devant les conteneurs de garde-meubles de l\'entrepôt' },
-  cab: { src: IMG + '2018/10/demenagements-courtes-longues-distances.png', pos: '100% 50%', alt: 'Tracteur routier rouge Postel pour les déménagements longue distance' },
-  fleet: { src: IMG + '2018/09/location-camion-demenagement.png', pos: '0% 50%', alt: 'Flotte de camions et porteurs Déménagements Postel' },
-  building: { src: IMG + '2018/09/demenagements-particuliers-professionnels.png', pos: '0% 50%', alt: 'Bâtiment et entrepôt Déménagements Postel' },
-  containers: { src: IMG + '2018/09/securite-optimale.png', pos: '0% 50%', alt: 'Conteneurs bois numérotés du garde-meubles Postel' },
-  piano: { src: IMG + '2018/10/pianos-transportons-nous.png', pos: '0% 50%', alt: 'Piano à queue préparé pour un transport' },
-  safe: { src: IMG + '2018/10/demenagement-coffre-fort.png', pos: '0% 50%', alt: 'Coffre-fort à déplacer' },
-  boxes: { src: IMG + '2018/05/shutterstock_521063737.jpg', pos: '50% 50%', alt: 'Cartons de déménagement prêts au chargement (photo d\'illustration)' },
-  archives: { src: IMG + '2018/09/espaces-archivages.png', pos: '0% 50%', alt: 'Espace d\'archivage sécurisé' },
-  selfstorage: { src: IMG + '2018/10/self-stockage.png', pos: '100% 50%', alt: 'Box de self-stockage au Grand-Quevilly' },
-  lift: { src: IMG + '2018/09/location-monte-meubles.png', pos: '0% 50%', alt: 'Monte-meubles en service sur une façade' },
+  logo: '/assets/img/logo-postel.png',
+  hero: I('hero-camion', [800, 1280, 1920], [1920, 976], 'Semi-remorque Déménagements Postel aux couleurs de l\'agence de Rouen', '40% 50%'),
+  flotte: I('flotte', [560, 960], [960, 450], 'Flotte de camions et de porteurs Déménagements Postel alignés devant le dépôt'),
+  tracteur: I('tracteur', [560, 960], [960, 599], 'Tracteur routier rouge Postel devant les conteneurs bois du garde-meubles', '30% 50%'),
+  chargementConteneur: I('chargement-conteneur', [560, 960], [960, 398], 'Camion Postel devant les conteneurs bois du garde-meubles'),
+  conteneurs: I('conteneurs', [560, 960], [960, 398], 'Conteneurs bois numérotés empilés dans l\'entrepôt Postel'),
+  equipeCarton: I('equipe-carton', [560, 960], [960, 398], 'Déménageur Postel portant un carton siglé devant les conteneurs', '60% 50%'),
+  equipeDos: I('equipe-dos', [560, 960], [960, 399], 'Déménageur Postel en tenue de l\'entreprise dans l\'entrepôt', '70% 50%'),
+  entrepot: I('entrepot', [560, 720], [720, 810], 'Rayonnages de l\'entrepôt de stockage Postel'),
+  monteMeubles: I('monte-meubles', [560, 720], [720, 810], 'Monte-meubles déployé le long d\'une façade d\'immeuble'),
+  box: I('box', [560, 960], [960, 598], 'Box de self-stockage ouvert, rempli de cartons et de meubles'),
+  selfStockage: I('self-stockage', [560, 946], [946, 450], 'Client rangeant ses affaires dans un box de self-stockage'),
+  chargement: I('chargement', [560, 960], [960, 499], 'Déménageur Postel arrimant le chargement dans un camion', '40% 50%'),
+  pianoQueue: I('piano-queue', [560, 960], [960, 400], 'Piano à queue prêt à être transporté'),
+  pianoDroit: I('piano-droit', [560, 960], [960, 400], 'Déménageurs Postel manipulant un piano droit protégé'),
+  coffreFort: I('coffre-fort', [560, 960], [960, 400], 'Déménageurs Postel déplaçant un coffre-fort'),
+  caisse: I('caisse', [560, 960], [960, 400], 'Caisse bois déplacée au chariot élévateur dans l\'entrepôt Postel'),
+  cabine: I('cabine', [560, 960], [960, 400], 'Cabine d\'un camion Postel devant les conteneurs bois', '30% 50%'),
+  equipeAgence: I('equipe-agence', [560, 960], [960, 500], 'L\'équipe Déménagements Postel réunie devant une agence'),
+  cartons: I('cartons', [560, 960], [960, 400], 'Carton de déménagement au logo Postel'),
+  conditionnement: I('conditionnement', [560, 960], [960, 400], 'Fermeture métallique d\'un conteneur bois du garde-meubles'),
 };
+// Anciennes clés (articles de blog, services) vers les nouvelles photos
+Object.assign(img, { truck: img.hero, truckDepot: img.chargementConteneur, cab: img.tracteur, fleet: img.flotte, building: img.equipeAgence, containers: img.conteneurs, piano: img.pianoQueue, safe: img.coffreFort, boxes: img.equipeCarton, archives: img.entrepot, selfstorage: img.selfStockage, lift: img.monteMeubles });
 
 export const agencies = [
   { id: 'rouen', city: 'Rouen', url: '/contact-rouen/', phone: '02 35 72 41 51', intl: '+33235724151', street: '33 Quai de France', zip: '76100', locality: 'Rouen', region: 'Seine-Maritime', lat: 49.4378, lng: 1.0815, role: 'Siège et agence principale',

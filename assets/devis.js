@@ -3,7 +3,7 @@
   var INV=JSON.parse(document.getElementById('inv-data').textContent);
   var steps=[].slice.call(form.querySelectorAll('.step')),bars=[].slice.call(document.querySelectorAll('.prog i'));
   var label=document.querySelector('.prog-label'),cur=0,qty={},mode='calc',KEY='postel-devis-v1';
-  var names=['Votre projet','Les adresses','Le volume','Les prestations','Vos coordonnées'];
+  var names=['Votre projet','Adresse de départ','Arrivée et date','Le volume','Les prestations','Vos coordonnées'];
 
   // ---------- Calculateur ----------
   var tabs=document.getElementById('tabs'),items=document.getElementById('items'),cats=Object.keys(INV),cat=cats[0];
@@ -39,7 +39,7 @@
   // ---------- Étapes ----------
   function show(i){cur=i;steps.forEach(function(s,j){s.classList.toggle('on',j===i)});bars.forEach(function(b,j){b.classList.toggle('on',j<=i)});
     label.textContent='Étape '+(i+1)+' sur '+steps.length+' : '+names[i];
-    if(i===4)recap();var top=form.getBoundingClientRect().top+window.pageYOffset-100;if(window.pageYOffset>top)window.scrollTo({top:top,behavior:'smooth'});
+    if(i===steps.length-1)recap();var top=form.getBoundingClientRect().top+window.pageYOffset-100;if(window.pageYOffset>top)window.scrollTo({top:top,behavior:'smooth'});
     var f=steps[i].querySelector('input:not([type=hidden]),select');if(f&&i>0)setTimeout(function(){f.focus({preventScroll:true})},50)}
   function valid(i){var ok=true;
     [].forEach.call(steps[i].querySelectorAll('[data-req]'),function(w){var ins=w.querySelectorAll('input,select,textarea'),good;
@@ -69,8 +69,8 @@
   form.addEventListener('input',save);
 
   // Préremplissage depuis l'URL (?type=militaire)
-  var p=new URLSearchParams(location.search).get('type');
-  load();if(p){var r=form.querySelector('input[name=type][value="'+p+'"]');if(r)r.checked=true}
+  var qs=new URLSearchParams(location.search),p=qs.get('type'),pf=qs.get('formule');
+  load();if(p){var r=form.querySelector('input[name=type][value="'+p+'"]');if(r)r.checked=true}if(pf){var rf=form.querySelector('input[name=formule][value="'+pf+'"]');if(rf)rf.checked=true}
   renderTabs();renderItems();sum();show(0);
 
   // ---------- Envoi réel ----------
